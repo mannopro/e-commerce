@@ -95,6 +95,28 @@ CREATE TABLE cthdbanhang (
     PRIMARY KEY (mahd, masp)
 );
 
+
+-- Tạo bảng giỏ hàng
+CREATE TABLE giohang (
+    magiohang INT AUTO_INCREMENT PRIMARY KEY,
+    makh INT,
+    ngaytao DATETIME DEFAULT CURRENT_TIMESTAMP,
+    trangthai BOOLEAN DEFAULT 0,
+    CONSTRAINT FK_giohang_khachhang FOREIGN KEY (makh) REFERENCES khachhang(makh)
+);
+
+-- Tạo bảng chi tiết giỏ hàng
+CREATE TABLE ctgiohang (
+    magiohang INT,
+    masp INT,
+    soluong INT,
+    dongia DECIMAL(18,2),
+    thanhtien DECIMAL(18,2),
+    PRIMARY KEY (magiohang, masp),
+    CONSTRAINT FK_ctgiohang_giohang FOREIGN KEY (magiohang) REFERENCES giohang(magiohang),
+    CONSTRAINT FK_ctgiohang_sanpham FOREIGN KEY (masp) REFERENCES sanpham(masp)
+);
+
 -- Các khóa ngoại
 
 ALTER TABLE hdbanhang
