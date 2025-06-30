@@ -1,143 +1,125 @@
-﻿use master
-create database quan_ly_ban_hang
-go 
-use quan_ly_ban_hang
-go
+﻿CREATE DATABASE quan_ly_ban_hang;
+USE quan_ly_ban_hang;
 
+CREATE TABLE sanpham (
+    masp INT AUTO_INCREMENT PRIMARY KEY,
+    tensp VARCHAR(255),
+    maloaisp INT,
+    soluong INT,
+    mota TEXT,
+    dongia DECIMAL(18, 2),
+    tinhtrang INT,
+    xuatxu VARCHAR(50),
+    chatlieu VARCHAR(50),
+    mausac VARCHAR(50),
+    img VARCHAR(255),
+    trangthai INT
+);
 
-create table sanpham(
-masp  int identity(1,1) primary key ,
-tensp nvarchar(255),
-maloaisp int,
-soluong int,
-mota ntext,
-dongia decimal(18, 2),
-tinhtrang int,
-xuatxu nvarchar(50),
-chatlieu nvarchar(50), 
-mausac nvarchar(50),
-img nvarchar(255),
-trangthai int,
+CREATE TABLE nhanvien (
+    tendangnhap VARCHAR(30) PRIMARY KEY,
+    matkhau CHAR(32),
+    hoten VARCHAR(50),
+    email VARCHAR(30),
+    diachi TEXT,
+    dienthoai VARCHAR(20),
+    ngaysinh DATE,
+    gioitinh BOOLEAN,
+    chucvu VARCHAR(20),
+    trangthai VARCHAR(20)
+);
 
-)
-go
-create table nhanvien(
-tendangnhap varchar(30),
-matkhau char(32),
-hoten nvarchar(50),
-email varchar(30),
-diachi ntext,
-dienthoai varchar(20),
-ngaysinh date,
-gioitinh bit,
-chucvu nvarchar(20),
-trangthai nvarchar(20),
+CREATE TABLE khachhang (
+    makh INT AUTO_INCREMENT PRIMARY KEY,
+    hoten VARCHAR(50),
+    diachi TEXT,
+    dienthoai VARCHAR(20),
+    ngaysinh DATE,
+    gioitinh BOOLEAN,
+    trangthai INT
+);
 
-primary key(tendangnhap)
-)
-go
+CREATE TABLE hdnhaphang (
+    maHoaDonNhap INT AUTO_INCREMENT PRIMARY KEY,
+    ngaynhap DATE,
+    manv VARCHAR(30),
+    mancc INT,
+    tongtien DECIMAL(18, 2),
+    trangthai INT
+);
 
-create table khachhang(
-makh int identity(1,1) primary key  ,
-hoten nvarchar(50),
-diachi ntext,
-dienthoai varchar(20),
-ngaysinh date,
-gioitinh bit,
-trangthai int,
+CREATE TABLE nhacungcap (
+    mancc INT AUTO_INCREMENT PRIMARY KEY,
+    ten VARCHAR(255),
+    website VARCHAR(50),
+    email VARCHAR(50),
+    dienthoai VARCHAR(20),
+    diachi TEXT,
+    trangthai INT
+);
 
-)
-go
-create table hdnhaphang(
-maHoaDonNhap int identity(1,1) primary key,
-ngaynhap date,
-manv varchar(30),
-mancc int,
-tongtien decimal(18, 2),
-trangthai int,
-)
-go
-create table nhacungcap(
-mancc int identity(1,1) primary key,
-ten nvarchar(255),
-website varchar(50),
-email varchar(50),
-dienthoai varchar(20),
-diachi ntext,
-trangthai int
+CREATE TABLE cthdnhaphang (
+    maHoaDonNhap INT,
+    masp INT,
+    soluong INT,
+    dongia DECIMAL(18, 2),
+    thanhtien DECIMAL(18, 2),
+    trangthai INT,
+    PRIMARY KEY (maHoaDonNhap, masp)
+);
 
-)
-go
-create table cthdnhaphang(
-maHoaDonNhap int,
-masp int,
-soluong int,
-dongia decimal(18, 2),
-thanhtien decimal(18, 2),
-trangthai int
-primary key(maHoaDonNhap,masp)
-)
-go
-create table loaisanpham(
-maloaisp int identity(1,1) primary key,
-ten nvarchar(50),
-trangthai int,
-)
-go
-create table hdbanhang(
-mahd int identity(1,1) primary key,
-ngayban date,
-manv varchar(30),
-makh int,        
-tongtien decimal(18, 2),
-trangthai bit
-)
-go
-create table cthdbanhang(
-mahd int,
-masp int,
-soluong int,
-dongia decimal(18, 2) ,
-thanhtien decimal(18, 2),
-giamgia decimal(18, 2),
-loaigiam nvarchar(10),
-trangthai bit,
-primary key(mahd,masp)
-)
-go
+CREATE TABLE loaisanpham (
+    maloaisp INT AUTO_INCREMENT PRIMARY KEY,
+    ten VARCHAR(50),
+    trangthai INT
+);
 
+CREATE TABLE hdbanhang (
+    mahd INT AUTO_INCREMENT PRIMARY KEY,
+    ngayban DATE,
+    manv VARCHAR(30),
+    makh INT,
+    tongtien DECIMAL(18, 2),
+    trangthai BOOLEAN
+);
 
-alter table hdbanhang
-add constraint FK_hdbanhang_khachhang foreign key(makh) references khachhang(makh)
-alter table hdbanhang
-add constraint FK_hdbanhang_nhanvien foreign key(manv) references nhanvien(tendangnhap)
+CREATE TABLE cthdbanhang (
+    mahd INT,
+    masp INT,
+    soluong INT,
+    dongia DECIMAL(18, 2),
+    thanhtien DECIMAL(18, 2),
+    giamgia DECIMAL(18, 2),
+    loaigiam VARCHAR(10),
+    trangthai BOOLEAN,
+    PRIMARY KEY (mahd, masp)
+);
 
-alter table cthdbanhang
-add constraint FK_cthdbanhang_hdbanhang foreign key(mahd) references hdbanhang(mahd)
-alter table cthdbanhang
-add constraint FK_cthdbanhang_sanpham foreign key(masp) references sanpham(masp)
+-- Các khóa ngoại
 
-alter table sanpham
-add constraint FK_sanpham_loaisanpham foreign key(maloaisp) references loaisanpham(maloaisp)
+ALTER TABLE hdbanhang
+ADD CONSTRAINT FK_hdbanhang_khachhang FOREIGN KEY (makh) REFERENCES khachhang(makh);
 
-alter table hdnhaphang
-add constraint FK_hdnhaphang_nhanvien foreign key(manv) references nhanvien(tendangnhap)
-alter table hdnhaphang
-add constraint FK_hdnhaphang_nhacungcap foreign key(mancc) references nhacungcap(mancc)
+ALTER TABLE hdbanhang
+ADD CONSTRAINT FK_hdbanhang_nhanvien FOREIGN KEY (manv) REFERENCES nhanvien(tendangnhap);
 
-alter table cthdnhaphang
-add constraint FK_cthdnhaphang_hdnhaphang foreign key(maHoaDonNhap) references hdnhaphang(maHoaDonNhap)
-alter table cthdnhaphang
-add constraint FK_cthdnhaphang_sanpham foreign key(masp) references sanpham(masp)
+ALTER TABLE cthdbanhang
+ADD CONSTRAINT FK_cthdbanhang_hdbanhang FOREIGN KEY (mahd) REFERENCES hdbanhang(mahd);
 
+ALTER TABLE cthdbanhang
+ADD CONSTRAINT FK_cthdbanhang_sanpham FOREIGN KEY (masp) REFERENCES sanpham(masp);
 
+ALTER TABLE sanpham
+ADD CONSTRAINT FK_sanpham_loaisanpham FOREIGN KEY (maloaisp) REFERENCES loaisanpham(maloaisp);
 
+ALTER TABLE hdnhaphang
+ADD CONSTRAINT FK_hdnhaphang_nhanvien FOREIGN KEY (manv) REFERENCES nhanvien(tendangnhap);
 
+ALTER TABLE hdnhaphang
+ADD CONSTRAINT FK_hdnhaphang_nhacungcap FOREIGN KEY (mancc) REFERENCES nhacungcap(mancc);
 
-select* from sanpham
+ALTER TABLE cthdnhaphang
+ADD CONSTRAINT FK_cthdnhaphang_hdnhaphang FOREIGN KEY (maHoaDonNhap) REFERENCES hdnhaphang(maHoaDonNhap);
 
-select* from cthdnhaphang
-
-select h.mahd,ngayban,n.hoten,s.tensp,c.soluong,c.dongia,c.thanhtien,h.tongtien,tendangnhap from hdbanhang h 
-          join cthdbanhang c on h.mahd=c.mahd join sanpham s on s.masp=c.masp join nhanvien n on n.tendangnhap=h.manv 
-         where h.mahd=1
+ALTER TABLE cthdnhaphang
+ADD CONSTRAINT FK_cthdnhaphang_sanpham FOREIGN KEY (masp) REFERENCES sanpham(masp);
