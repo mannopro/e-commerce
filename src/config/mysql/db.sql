@@ -18,7 +18,7 @@ CREATE TABLE sanpham (
 
 CREATE TABLE nhanvien (
     tendangnhap VARCHAR(30) PRIMARY KEY,
-    matkhau CHAR(32),
+    matkhau VARCHAR(250),
     hoten VARCHAR(50),
     email VARCHAR(30),
     diachi TEXT,
@@ -31,6 +31,8 @@ CREATE TABLE nhanvien (
 
 CREATE TABLE khachhang (
     makh INT AUTO_INCREMENT PRIMARY KEY,
+    tendangnhap VARCHAR(50),
+    matkhau VARCHAR(250)
     hoten VARCHAR(50),
     diachi TEXT,
     dienthoai VARCHAR(20),
