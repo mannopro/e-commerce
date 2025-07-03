@@ -16,6 +16,7 @@ async function existingKhachHang(username) {
 const signup = async (req,res)=>{
     try {
         const {username,password}=req.body;
+        console.log(username,password)
         const isExist=await existingKhachHang(username)
         if(isExist){
             res.status(400).json({message:"username already exists"})
@@ -24,7 +25,7 @@ const signup = async (req,res)=>{
         const salt=10;
         const hashedPassword=await bcrypt.hash(password,salt);
           await khachhang.insertKhachHang(username,hashedPassword)
-          res.status(201).json({message:"signup success"})
+          res.status(200).json({message:"signup success"})
     } catch (error) {
             res.status(401).json({message:"signup failed",error:error.message})
 
