@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Giỏ hàng</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <div class="container my-5">
+    <h2 class="mb-4 text-center">🛒 Giỏ hàng của bạn</h2>
+
+    <% if (!cart || cart.length === 0) { %>
+      <div class="alert alert-warning text-center">Giỏ hàng trống</div>
+    <% } else { %>
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle text-center">
+          <thead class="table-dark">
+            <tr>
+              <th>Sản phẩm</th>
+              <th>Giá</th>
+              <th>Số lượng</th>
+              <th>Thành tiền</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% cart.forEach(item => { %>
+              <tr>
+                <td><%= item.tensp %></td>
+                <td><%= item.dongia.toLocaleString() %> VNĐ</td>
+                <td>
+                  <div class="d-flex justify-content-center align-items-center">
+                    <a href="/cart/decrease/<%= item.masp %>" class="btn btn-sm btn-outline-secondary me-2">-</a>
+                    <span><%= item.soluong %></span>
+                    <a href="/cart/increase/<%= item.masp %>" class="btn btn-sm btn-outline-secondary ms-2">+</a>
+                  </div>
+                </td>
+                <td><%= (item.dongia * item.soluong).toLocaleString() %> VNĐ</td>
+                <td>
+                  <a href="/cart/remove/<%= item.masp %>" class="btn btn-sm btn-danger">Xóa</a>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+
+      <h4 class="text-end text-success">
+        Tổng tiền: <%= Number(total || 0).toLocaleString() %> VNĐ
+      </h4>
+
+
+
+      <div class="text-end mt-3">
+        <a href="/cart/clear" class="btn btn-outline-danger">🗑 Xóa toàn bộ giỏ hàng</a>
+        <a href="/" class="btn btn-outline-primary ms-2">⬅ Tiếp tục mua hàng</a>
+        <!-- <a href="/checkout" class="btn btn-success ms-2">Thanh toán</a> -->
+      </div>
+    <% } %>
+  </div>
+
+  <script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

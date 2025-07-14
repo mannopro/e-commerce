@@ -1,0 +1,41 @@
+<footer class="bg-dark text-light mt-5 py-4">
+  <div class="container">
+    <div class="row">
+
+      <!-- Cột 1: Thông tin -->
+      <div class="col-md-4">
+        <h5>Về chúng tôi</h5>
+        <p>Trang Newsfeed cung cấp những bài viết mới nhất về công nghệ, đời sống, sức khỏe và hơn thế nữa.</p>
+      </div>
+
+      <!-- Cột 2: Liên kết nhanh -->
+      <div class="col-md-4">
+        <h5>Liên kết</h5>
+        <ul class="list-unstyled">
+          <li><a href="/" class="text-light">Trang chủ</a></li>
+          <li><a href="/lienhe" class="text-light">Liên hệ</a></li>
+          <li><a href="/baiviet" class="text-light">Bài viết</a></li>
+          <li><a href="/about" class="text-light">Giới thiệu</a></li>
+        </ul>
+      </div>
+
+      <!-- Cột 3: Đăng ký newsletter -->
+      <div class="col-md-4">
+        <h5>Đăng ký nhận tin</h5>
+        <form action="/newsletter" method="POST">
+          <div class="input-group">
+            <input type="email" name="email" class="form-control" placeholder="Nhập email của bạn" required>
+            <button class="btn btn-primary" type="submit">Gửi</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+    <hr class="border-light">
+
+    <div class="text-center">
+      <p class="mb-0">© <%= new Date().getFullYear() %> Newsfeed. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

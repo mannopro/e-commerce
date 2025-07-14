@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Trang chủ - Cà phê</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .card img {
+      height: 180px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <%- include('partials/navbar') %>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="/">☕ Cà phê</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">🏠 Trang chủ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/cart">🛒 Giỏ hàng</a>
+          </li>
+          <% if (user) { %>
+            <li class="nav-item">
+              <a class="nav-link disabled">👋 <%= user.ten %></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">🔓 Đăng xuất</a>
+            </li>
+          <% } else { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">🔐 Đăng nhập</a>
+            </li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Nội dung -->
+  <div class="container mt-4">
+    <h2 class="text-center mb-4">☕ Danh sách sản phẩm</h2>
+    <div class="row">
+      <% products.forEach(p => { %>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 shadow-sm">
+            <img src="/images/<%= p.img %>" class="card-img-top" alt="<%= p.tensp %>">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title"><%= p.tensp %></h5>
+              <p class="card-text text-danger fw-bold"><%= p.dongia.toLocaleString() %> VNĐ</p>
+              <a href="/cart/add/<%= p.masp %>" class="btn btn-primary mt-auto">Thêm vào giỏ</a>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+  <script src="/js/bootstrap.bundle.min.js"></script>
+  <%- include('partials/footer') %>
+</body>
+</html>
+
