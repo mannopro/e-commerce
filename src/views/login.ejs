@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Đăng nhập</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-6 col-lg-5">
+        <div class="card shadow">
+          <div class="card-body">
+            <h3 class="card-title text-center mb-4">🔐 Đăng nhập</h3>
+
+            <% if (error) { %>
+              <div class="alert alert-danger"><%= error %></div>
+            <% } %>
+
+            <form method="POST" action="/login">
+              <div class="mb-3">
+                <label for="tendangnhap" class="form-label">📧 Tên đăng nhập</label>
+                <input type="text" name="tendangnhap" id="tendangnhap" class="form-control" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="password" class="form-label">🔑 Mật khẩu</label>
+                <input type="password" name="password" id="password" class="form-control" required>
+              </div>
+
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Đăng nhập</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <p class="text-center mt-3 text-muted">Chưa có tài khoản? Hãy liên hệ quản trị viên!</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+

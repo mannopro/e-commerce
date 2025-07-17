@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="/">NEWSFEED</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <!-- Menu trái -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" href="/">Trang chủ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/baiviet">Bài viết</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/danhmuc">Chủ đề</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/lienhe">Liên hệ</a>
+        </li>
+      </ul>
+
+      <!-- Menu phải -->
+      <form class="d-flex" action="/search" method="GET">
+        <input class="form-control me-2" type="search" name="q" placeholder="Tìm kiếm..." aria-label="Search">
+        <button class="btn btn-outline-light" type="submit">Tìm</button>
+      </form>
+    </div>
+  </div>
+</nav>

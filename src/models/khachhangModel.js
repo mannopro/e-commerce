@@ -11,10 +11,10 @@ const findByUserName =  async (tendangnhap)=>{
    }
 }
 
-const insertKhachHang = async(username,password)=>{
+const insertKhachHang = async(username,password,name)=>{
     try {
-        const sql='INSERT INTO KHACHHANG(tendangnhap,matkhau) VALUES(?,?)';
-         await db.query(sql,[username,password]);
+        const sql='INSERT INTO KHACHHANG(tendangnhap,matkhau,hoten) VALUES(?,?,?)';
+         await db.query(sql,[username,password,name]);
     } catch (error) {
       console.log(error);
     }
