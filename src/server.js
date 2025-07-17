@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-const express=require("express")
-=======
 const express = require("express");
 require("dotenv").config()
->>>>>>> 6f10d74 (gio hang)
 const app=express();
 require("dotenv").config({path:"../.env"})
 
